@@ -1,6 +1,6 @@
 <?php
 include 'connexion.php';
-
+mysqli_report(MYSQLI_REPORT_OFF);
 $message = "";
 $erreur = "";
 
@@ -18,11 +18,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO users (nom, prenom, email, mot_de_passe) 
                 VALUES ('$nom', '$prenom', '$email', '$mdp_hash')";
 
-        if (mysqli_query($conn, $sql)) {
-            $message = "Compte créé avec succès !";
-        } else {
-            $erreur = "Email déjà utilisé ou erreur serveur.";
-        }
+       if (mysqli_query($conn, $sql)) {
+    $message = "Compte créé avec succès !";
+} else {
+    if (mysqli_errno($conn) == 1062) {
+        $erreur = "Cet email est déjà utilisé !";
+    } else {
+        $erreur = "Erreur serveur: " . mysqli_error($conn);
+    }
+}
     }
 }
 ?>
