@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
   <meta charset="UTF-8">
   <title>Inscription — Car & Louage</title>
-  <style>
+ <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, sans-serif;
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       text-align: center;
       font-size: 1.8rem;
       font-weight: bold;
-      color: #e74c3c;
+      color: #004e64;
       margin-bottom: 0.3rem;
     }
     h2 {
@@ -83,11 +83,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       outline: none;
       transition: border-color 0.2s;
     }
-    input:focus { border-color: #e74c3c; }
+    input:focus { border-color: #004e64; }
     .btn {
       width: 100%;
       padding: 0.85rem;
-      background: #e74c3c;
+      background: #004e64;
       color: white;
       border: none;
       border-radius: 8px;
@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       margin-top: 0.5rem;
       transition: background 0.2s;
     }
-    .btn:hover { background: #c0392b; }
+    .btn:hover { background: #003d4f; }
     .success {
       background: #eafaf1;
       color: #27ae60;
@@ -110,8 +110,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     .error {
       background: #fdf0f0;
-      color: #e74c3c;
-      border: 1px solid #f5b7b1;
+      color: #004e64;
+      border: 1px solid #b3d9e0;
       border-radius: 8px;
       padding: 0.75rem;
       text-align: center;
@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       font-size: 0.88rem;
       color: #888;
     }
-    .footer-link a { color: #e74c3c; text-decoration: none; }
+    .footer-link a { color: #004e64; text-decoration: none; }
     .footer-link a:hover { text-decoration: underline; }
   </style>
 </head>
