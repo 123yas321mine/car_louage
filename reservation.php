@@ -56,6 +56,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
                 $message = "Réservation confirmée avec succès !";
+                $upd = mysqli_query($conn,
+                "UPDATE voyages 
+                 SET places_dispo = places_dispo - 1 
+                 WHERE id_voyage = '$id_voyage'");
+
+                echo "Update result: " . ($upd ? "OK" : mysqli_error($conn));
+                echo " | id_voyage: " . $id_voyage;
+                echo " | places avant: " . $voyage['places_dispo'];
 
                 $result = mysqli_query($conn,
                     "SELECT * FROM voyages WHERE id_voyage = '$id_voyage'");
