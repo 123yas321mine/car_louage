@@ -44,6 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $ins = mysqli_query($conn,
                 "INSERT INTO reservations (id_user, id_voyage) 
                  VALUES ('$id_user', '$id_voyage')");
+            echo "INSERT: " . ($ins ? "OK" : mysqli_error($conn));
+            echo " | id_user: " . $id_user;
+            echo " | id_voyage: " . $id_voyage;
+
 
             if ($ins) {
                $upd = mysqli_query($conn,
