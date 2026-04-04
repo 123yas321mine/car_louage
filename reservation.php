@@ -44,10 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $ins = mysqli_query($conn,
                 "INSERT INTO reservations (id_user, id_voyage) 
                  VALUES ('$id_user', '$id_voyage')");
-            echo "INSERT: " . ($ins ? "OK" : mysqli_error($conn));
-            echo " | id_user: " . $id_user;
-            echo " | id_voyage: " . $id_voyage;
-
+            
 
             if ($ins) {
                $upd = mysqli_query($conn,
@@ -60,14 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
                 $message = "Réservation confirmée avec succès !";
-                $upd = mysqli_query($conn,
-                "UPDATE voyages 
-                 SET places_dispo = places_dispo - 1 
-                 WHERE id_voyage = '$id_voyage'");
-
-                echo "Update result: " . ($upd ? "OK" : mysqli_error($conn));
-                echo " | id_voyage: " . $id_voyage;
-                echo " | places avant: " . $voyage['places_dispo'];
+                
+                
 
                 $result = mysqli_query($conn,
                     "SELECT * FROM voyages WHERE id_voyage = '$id_voyage'");
