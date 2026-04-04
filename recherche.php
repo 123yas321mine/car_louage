@@ -168,13 +168,13 @@ if (isset($_GET['search'])) {
       <div class="form-group">
         <label>Ville de départ</label>
         <input type="text" name="ville_depart"
-               placeholder="Ex: Tunis"
+               placeholder="ville  de depart"
                value="<?= $_GET['ville_depart'] ?? '' ?>" required />
       </div>
       <div class="form-group">
         <label>Ville d'arrivée</label>
         <input type="text" name="ville_arrivee"
-               placeholder="Ex: Sfax"
+               placeholder="ville d arrivee"
                value="<?= $_GET['ville_arrivee'] ?? '' ?>" required />
       </div>
     </div>
