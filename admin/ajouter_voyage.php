@@ -191,4 +191,4 @@ $voyages = mysqli_query($conn, "SELECT * FROM voyages ORDER BY date_voyage DESC"
   </table>
 </div>
 </body>
-</html>
+</html> 
