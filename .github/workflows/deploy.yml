@@ -19,6 +19,9 @@ jobs:
       - name: Lance les containers
         run: docker compose up -d
 
+      - name: Attends que Apache démarre
+        run: sleep 10
+
       - name: Vérifie que Apache répond
         run: curl -f http://localhost:8080 || exit 1
 
