@@ -8,6 +8,15 @@ if (!isset($_SESSION['id_user'])) {
     exit();
 }
 
+$villes = [
+    "Ariana", "Béja", "Ben Arous", "Bani Kheddache", "Ben Guerdane",
+    "Bizerte", "Gabès", "Gafsa", "Jendouba", "Jerba",
+    "Kairouan", "Kasserine", "Kebili", "Le Kef", "Mahdia",
+    "Manouba", "Médenine", "Monastir", "Nabeul", "Qarqna",
+    "Sfax", "Sidi Bouzid", "Siliana", "Sousse", "Tataouine",
+    "Tozeur", "Tunis", "Zaghouan"
+];
+
 $voyages  = null;
 $searched = false;
 
@@ -62,6 +71,8 @@ if (isset($_GET['search'])) {
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
       font-size: 0.88rem;
     }
     .form-group { margin-bottom: 1rem; }
@@ -71,7 +82,7 @@ if (isset($_GET['search'])) {
       color: #555;
       margin-bottom: 0.3rem;
     }
-    input {
+    select, input {
       width: 100%;
       padding: 0.75rem 1rem;
       border: 1.5px solid #ddd;
@@ -79,8 +90,10 @@ if (isset($_GET['search'])) {
       font-size: 0.95rem;
       outline: none;
       transition: border-color 0.2s;
+      background: white;
+      color: #333;
     }
-    input:focus { border-color: #004e64; }
+    select:focus, input:focus { border-color: #004e64; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .btn {
       width: 100%;
@@ -158,8 +171,9 @@ if (isset($_GET['search'])) {
     <h1>🔍 Rechercher un voyage</h1>
     <div>
       Bonjour <strong><?= $_SESSION['nom'] ?></strong> |
-      <a href="mes_reservations.php">Mes réservations</a> |
-      <a href="logout.php">Déconnexion</a>
+      <a href="mes_reservations.php">🎫 Mes réservations</a> |
+      <a href="accueil.php">🏠 Accueil</a> |
+      <a href="logout.php" style="color:#e74c3c;">Déconnexion</a>
     </div>
   </div>
 
@@ -167,15 +181,27 @@ if (isset($_GET['search'])) {
     <div class="form-row">
       <div class="form-group">
         <label>Ville de départ</label>
-        <input type="text" name="ville_depart"
-               placeholder="ville  de depart"
-               value="<?= $_GET['ville_depart'] ?? '' ?>" required />
+        <select name="ville_depart" required>
+          <option value="">-- Choisir --</option>
+          <?php foreach ($villes as $ville): ?>
+            <option value="<?= $ville ?>"
+              <?= (isset($_GET['ville_depart']) && $_GET['ville_depart'] == $ville) ? 'selected' : '' ?>>
+              <?= $ville ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
       </div>
       <div class="form-group">
         <label>Ville d'arrivée</label>
-        <input type="text" name="ville_arrivee"
-               placeholder="ville d arrivee"
-               value="<?= $_GET['ville_arrivee'] ?? '' ?>" required />
+        <select name="ville_arrivee" required>
+          <option value="">-- Choisir --</option>
+          <?php foreach ($villes as $ville): ?>
+            <option value="<?= $ville ?>"
+              <?= (isset($_GET['ville_arrivee']) && $_GET['ville_arrivee'] == $ville) ? 'selected' : '' ?>>
+              <?= $ville ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
       </div>
     </div>
     <div class="form-group">
