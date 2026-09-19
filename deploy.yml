@@ -1,0 +1,53 @@
+---
+- name: Déployer Car & Louage
+  hosts: lab
+  become: true
+  tasks:
+    - name: Mettre à jour le cache apt
+      apt:
+        update_cache: yes
+    - name: Installer les dépendances Docker
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+        state: present
+    - name: Installer Docker
+      apt:
+        name: docker.io
+        state: present
+    - name: Installer le plugin Docker Compose
+      apt:
+        name: docker-compose-v2
+        state: present
+    - name: Démarrer le démon Docker manuellement
+      shell: dockerd --storage-driver=vfs > /var/log/dockerd.log 2>&1 &
+      async: 1
+      poll: 0
+
+    - name: Attendre que Docker soit prêt
+      wait_for:
+        path: /var/run/docker.sock
+        timeout: 15
+    - name: Créer le dossier du projet
+      file:
+        path: /opt/car-louage
+        state: directory
+        mode: '0755'
+    - name: Copier le docker-compose.yml
+      copy:
+        src: project/docker-compose.yml
+        dest: /opt/car-louage/docker-compose.yml
+    - name: Copier le Dockerfile
+      copy:
+        src: project/Dockerfile
+        dest: /opt/car-louage/Dockerfile
+    - name: Copier le fichier SQL d'init
+      copy:
+        src: project/car_louage.sql
+        dest: /opt/car-louage/car_louage.sql
+    - name: Lancer les conteneurs
+      command: docker compose up -d
+      args:
+        chdir: /opt/car-louage
